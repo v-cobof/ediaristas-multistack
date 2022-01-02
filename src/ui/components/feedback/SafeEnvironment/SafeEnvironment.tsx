@@ -6,10 +6,8 @@ const SafeEnvironment = () => {
   return (
     
     <SafeEnvironmentContainer>
-      {/* eslint-disable @next/next/no-sync-scripts*/}
-      <script src="https://kit.fontawesome.com/ab209306f8.js" crossOrigin="anonymous"></script>
       <Container>
-        Ambiente Seguro   <i className="fas fa-lock"></ i>
+        Ambiente Seguro
       </Container>
 
     </SafeEnvironmentContainer>
