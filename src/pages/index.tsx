@@ -91,11 +91,11 @@ const Home: NextPage = () => {
             </Container>
           </ProfissionalPaper>
           :
-          (
-            <Typography align={'center'} color={'textPrimary'}>
+          <Container>
+            <Typography align={'center'} color={'textPrimary'} sx={{mb: 5}}>
               Ainda não temos nenhuma diarista disponível em sua região
             </Typography>
-          )
+          </ Container>
         )}
 
 

@@ -24,7 +24,7 @@ export default function useIndex() {
       const { data } = await ApiService.get<{
         diaristas: UserShortInterface[];
         quantidade_diaristas: number
-      }>('/api/diaristas-cidade?cep' + cep.replace(/\D/g, ''));
+      }>('/api/diaristas-cidade?cep=' + cep.replace(/\D/g, ''));
       setDiaristas(data.diaristas);
       setDiaristasRestantes(data.quantidade_diaristas);
 
