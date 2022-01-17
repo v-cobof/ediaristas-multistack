@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.treinaweb.ediaristas.models.Diarista;
 import br.com.treinaweb.ediaristas.repositories.DiaristaRepository;
 import br.com.treinaweb.ediaristas.services.FileService;
+import br.com.treinaweb.ediaristas.services.ViaCepService;
 
 @Controller
 @RequestMapping("/admin/diaristas")
@@ -28,6 +29,9 @@ public class DiaristaController {
 
   @Autowired
   private FileService fileService;
+
+  @Autowired
+  private ViaCepService viaCepService;
 
   @GetMapping
   public ModelAndView listar() {
