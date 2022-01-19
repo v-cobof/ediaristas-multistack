@@ -141,17 +141,6 @@
           </ul>
         </div>
 
-        <div class="mb-3">
-          <label class="form-label" for="codigoIBGE">Código IBGE</label>
-          <input class="form-control" type="text" th:field="*{codigoIBGE}" />
-          <ul>
-            <li
-              th:each="erro : ${#fields.errors('codigoIBGE')}"
-              th:text="${erro}"
-            ></li>
-          </ul>
-        </div>
-
         <div class="mb3">
           <label for="imagem" class="for-label">Foto</label>
           <input type="file" class="form-control" id="imagem" name="imagem" />
