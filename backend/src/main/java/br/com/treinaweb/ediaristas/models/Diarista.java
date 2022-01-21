@@ -1,5 +1,8 @@
 package br.com.treinaweb.ediaristas.models;
 
+import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -11,8 +14,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.br.CPF;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+
+import br.com.treinaweb.ediaristas.controllers.FileController;
 import br.com.treinaweb.ediaristas.converters.CepConverter;
 import br.com.treinaweb.ediaristas.converters.CpfConverter;
 import br.com.treinaweb.ediaristas.converters.TelefoneConverter;
@@ -36,6 +44,7 @@ public class Diarista {
   @NotNull
   @Size(min = 3, max = 100)
   @Column(nullable = false, length = 100)
+  @JsonProperty("nome_completo")
   private String nomeCompleto;
 
   @NotNull
@@ -43,42 +52,50 @@ public class Diarista {
   @CPF
   @Column(nullable = false, length = 11, unique = true)
   @Convert(converter = CpfConverter.class)
+  @JsonIgnore
   private String cpf;
 
   @NotNull
   @NotEmpty
   @Email
   @Column(nullable = false, unique = true)
+  @JsonIgnore
   private String email;
 
   @NotNull
   @Size(min = 11, max = 15)
   @Column(nullable = false, length = 11)
   @Convert(converter = TelefoneConverter.class)
+  @JsonIgnore
   private String telefone;
 
   @NotNull
   @NotEmpty
   @Column(nullable = false)
+  @JsonIgnore
   private String logradouro;
 
   @NotNull
   @NotEmpty
   @Column(nullable = false)
+  @JsonIgnore
   private String numero;
 
   @NotNull
   @NotEmpty
   @Column(nullable = false)
+  @JsonIgnore
   private String bairro;
 
   @Column(nullable = true)
+  @JsonIgnore
   private String complemento;
 
   @NotNull
   @Size(min = 8, max = 9)
   @Column(nullable = false, length = 8)
   @Convert(converter = CepConverter.class)
+  @JsonIgnore
   private String cep;
 
   @NotNull
@@ -89,12 +106,23 @@ public class Diarista {
   @NotNull
   @Size(min = 2, max = 2)
   @Column(nullable = false, length = 2)
+  @JsonIgnore
   private String estado;
 
   @Column(nullable = false)
+  @JsonIgnore
   private String codigoIBGE;
 
   @Column(nullable = false)
+  @JsonIgnore
   private String foto;
 
+  @JsonProperty("foto_usuario")
+  public String getFotoUrl() throws IOException {
+    return WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(FileController.class).file(this.foto)).toString();
+  }
+
+  public Integer getReputacao() {
+    return ThreadLocalRandom.current().nextInt(0, 6);
+  }
 }

@@ -25,7 +25,7 @@ public class CepValidator implements Validator {
 
     try {
       var cep = diarista.getCep();
-      viaCepService.buscarEnderecoPorCep(cep)
+      viaCepService.buscarEnderecoPorCep(cep);
     } catch (RuntimeException e) {
       errors.rejectValue("Cep", null, e.getMessage());
     }
